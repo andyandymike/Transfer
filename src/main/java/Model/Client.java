@@ -1,13 +1,9 @@
 package Model;
 
-public class Client {
-    private String test;
+public class Client extends Participant {
 
-    public String getTest() {
-        return test;
+    public Client(String clientName) {
+        super(clientName, 0);
     }
 
-    public void setTest(String test) {
-        this.test = test;
-    }
 }

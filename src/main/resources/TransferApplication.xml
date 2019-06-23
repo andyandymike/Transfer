@@ -3,8 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean name="TransferApplication" class="Model.Client">
-        <property name="test" value="test"></property>
+    <import resource="Config.xml" />
+
+    <bean name="TransferApplication" class="TransferApplication">
     </bean>
 
 </beans>
