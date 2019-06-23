@@ -7,16 +7,17 @@
         <property name="round" value="5"></property>
         <property name="reasonList">
             <list>
-                <value>"Salary"</value>
-                <value>"Outing"</value>
+                <value>Salary</value>
+                <value>Outing</value>
+                <value>Rent Fee</value>
             </list>
         </property>
         <property name="serverName" value="Bao, Li"></property>
         <property name="clientNameList">
             <list>
-                <value>"Zhang, Ruofan"</value>
-                <value>"Lu, Chunzhe"</value>
-                <value>"Xiong, Dan"</value>
+                <value>Zhang, Ruofan</value>
+                <value>Lu, Chunzhe</value>
+                <value>Xiong, Dan</value>
             </list>
         </property>
         <property name="initDispense" value="50000"></property>

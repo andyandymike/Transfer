@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static Util.Util.getRandomReason;
+
 public class Participant {
     private static Logger logger = LogManager.getLogger(Participant.class);
 
@@ -42,7 +44,7 @@ public class Participant {
 
         balance = balance - value;
 
-        logger.info(ParticipantName + " Give " + value + " to " + toWhom);
+        logger.info(ParticipantName + " Give " + value + " to " + toWhom + " with reason " + getRandomReason());
 
         addIncome(toWhom, value);
     }

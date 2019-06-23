@@ -1,5 +1,6 @@
 package Util;
 
+import Constant.Config;
 import Model.Participant;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -48,5 +49,10 @@ public class Util {
         for(Participant participant : participants) {
             logger.debug(participant.getParticipantName() + " has balance " + participant.getBalance());
         }
+    }
+
+    public static String getRandomReason() {
+        Integer reasonNum = new Random().nextInt(Config.getReasonList().size());
+        return Config.getReasonList().get(reasonNum);
     }
 }
