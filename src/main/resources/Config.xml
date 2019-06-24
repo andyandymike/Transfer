@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean name="Config" class="Constant.Config">
-        <property name="round" value="5"></property>
+        <property name="round" value="20"></property>
         <property name="reasonList">
             <list>
                 <value>Salary</value>
@@ -12,16 +12,18 @@
                 <value>Rent Fee</value>
             </list>
         </property>
-        <property name="serverName" value="Bao, Li"></property>
+        <property name="serverName" value="Bao, Li 000 xxx 000"></property>
         <property name="clientNameList">
             <list>
-                <value>Zhang, Ruofan</value>
-                <value>Lu, Chunzhe</value>
-                <value>Xiong, Dan</value>
+                <value>Zhang, Ruofan 123 xxx 321</value>
+                <value>Lu, Chunzhe 456 xxx 654</value>
+                <value>Xiong, Dan 789 xxx 987</value>
             </list>
         </property>
-        <property name="initDispense" value="50000"></property>
-        <property name="totalBalance" value="100000"></property>
+        <property name="initDispense" value="25000"></property>
+        <property name="totalBalance" value="50000"></property>
+        <property name="transferGround" value="10000"></property>
+        <property name="transferFloor" value="30000"></property>
     </bean>
 
 </beans>

@@ -38,15 +38,41 @@ public class Util {
             throw new NumberFormatException("Cannot generate a random number less than half of " + number);
         }
 
-        return new Random().nextInt(number/2);
+        return new Random().nextInt(number / 2);
+    }
+
+    public static Integer generateRandomInRange(Integer floor) {
+        Integer ground = Config.getTransferGround();
+        
+        if (ground > floor) {
+            throw new NumberFormatException("ground " + ground + " is lager than floor " + floor);
+        }
+
+        if (ground < Config.getTransferGround()) {
+            throw new NumberFormatException("ground " + ground + " is less than " + Config.getTransferGround());
+        }
+
+        if (floor > Config.getTransferFloor()) {
+            floor = Config.getTransferFloor();
+        }
+
+        return new Random().nextInt(floor - ground + 1) + ground;
     }
 
     public static int[] generateRandomTransferList(Integer totalNum) {
         return new Random().ints(0, totalNum).distinct().limit(totalNum).toArray();
     }
 
+    public static int generateRandomNextTransfer(Integer currentNum, Integer totalNum) {
+        Integer next = new Random().nextInt(totalNum);
+        while (next == currentNum) {
+            next = new Random().nextInt(totalNum);
+        }
+        return next;
+    }
+
     public static void printCurrentAllBalance(List<Participant> participants) {
-        for(Participant participant : participants) {
+        for (Participant participant : participants) {
             logger.debug(participant.getParticipantName() + " has balance " + participant.getBalance());
         }
     }

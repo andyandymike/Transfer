@@ -31,37 +31,49 @@ public class TransferApplication {
         }
 
         Integer totalParticipantNum = participantList.size();
-        try {
-            List<Integer> initBalanceList = separateNum(Config.getInitDispense(), Config.getClientNameList().size());
-            for (int i = 0; i < initBalanceList.size(); i++) {
-                server.minusBalance(clientList.get(i).getParticipantName(), initBalanceList.get(i));
-                clientList.get(i).addBalance(server.getParticipantName(), initBalanceList.get(i));
-
-            }
-            logger.info("---------- init finished ----------");
-
-            for (int i = 1; i < Config.getRound() + 1; i++) {
-                int[] transferArray = generateRandomTransferList(totalParticipantNum);
-                for(int j = 0; j < totalParticipantNum; j++) {
-                    String toWhom = participantList.get(transferArray[j]).getParticipantName();
-                    String fromWhom = participantList.get(j).getParticipantName();
-                    Integer transferNum = generateRandomLessThanHalf(participantList.get(j).getBalance());
-                    participantList.get(j).minusBalance(toWhom, transferNum);
-                    participantList.get(transferArray[j]).addBalance(fromWhom, transferNum);
-                }
-                printCurrentAllBalance(participantList);
-                logger.info("---------- " + i + " round finished ----------");
-            }
-
-            for(Client client : clientList) {
-                server.addBalance(client.getParticipantName(), client.getBalance());
-                client.minusBalance(server.getParticipantName(), client.getBalance());
-            }
+        Integer currentNum = 0;
+        Integer initFloor = Config.getTransferFloor();
+        for(int i = 1; i < Config.getRound() + 1; i++) {
+            Integer next = generateRandomNextTransfer(currentNum, totalParticipantNum);
+            Integer nextTransferNum = generateRandomInRange(initFloor);
+            participantList.get(currentNum).minusBalance(participantList.get(next).getParticipantName(), nextTransferNum);
+            participantList.get(next).addBalance(participantList.get(currentNum).getParticipantName(), nextTransferNum);
+            currentNum = next;
+            initFloor = participantList.get(next).getBalance();
+            logger.info("---------- " + i + " round finished ----------");
             printCurrentAllBalance(participantList);
-            logger.info("---------- teardown finished ----------");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
+        }
+//        try {
+//            List<Integer> initBalanceList = separateNum(Config.getInitDispense(), Config.getClientNameList().size());
+//            for (int i = 0; i < initBalanceList.size(); i++) {
+//                server.minusBalance(clientList.get(i).getParticipantName(), initBalanceList.get(i));
+//                clientList.get(i).addBalance(server.getParticipantName(), initBalanceList.get(i));
+//
+//            }
+//            logger.info("---------- init finished ----------");
+//
+//            for (int i = 1; i < Config.getRound() + 1; i++) {
+//                int[] transferArray = generateRandomTransferList(totalParticipantNum);
+//                for(int j = 0; j < totalParticipantNum; j++) {
+//                    String toWhom = participantList.get(transferArray[j]).getParticipantName();
+//                    String fromWhom = participantList.get(j).getParticipantName();
+//                    Integer transferNum = generateRandomLessThanHalf(participantList.get(j).getBalance());
+//                    participantList.get(j).minusBalance(toWhom, transferNum);
+//                    participantList.get(transferArray[j]).addBalance(fromWhom, transferNum);
+//                }
+//                printCurrentAllBalance(participantList);
+//                logger.info("---------- " + i + " round finished ----------");
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        for (Client client : clientList) {
+            server.addBalance(client.getParticipantName(), client.getBalance());
+            client.minusBalance(server.getParticipantName(), client.getBalance());
+        }
+        printCurrentAllBalance(participantList);
+        logger.info("---------- teardown finished ----------");
     }
 }

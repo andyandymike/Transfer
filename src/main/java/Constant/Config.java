@@ -15,6 +15,10 @@ public class Config {
 
     private static Integer round;
 
+    private static Integer transferGround;
+
+    private static Integer transferFloor;
+
     public static void addReason(String reason) {
         reasonList.add(reason);
     }
@@ -69,5 +73,21 @@ public class Config {
 
     public static void setInitDispense(Integer initDispense) {
         Config.initDispense = initDispense;
+    }
+
+    public static Integer getTransferGround() {
+        return transferGround;
+    }
+
+    public static void setTransferGround(Integer transferGround) {
+        Config.transferGround = transferGround;
+    }
+
+    public static Integer getTransferFloor() {
+        return transferFloor;
+    }
+
+    public static void setTransferFloor(Integer transferFloor) {
+        Config.transferFloor = transferFloor;
     }
 }
